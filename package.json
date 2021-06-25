@@ -1,0 +1,19 @@
+{
+  "name": "finddit",
+  "version": "1.0.0",
+  "description": "Reddit Search App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IshanGarg2596/Finddit.git"
+  },
+  "author": "Ishan Garg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IshanGarg2596/Finddit/issues"
+  },
+  "homepage": "https://github.com/IshanGarg2596/Finddit#readme"
+}
