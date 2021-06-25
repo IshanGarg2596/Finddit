@@ -119,10 +119,44 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"index.js":[function(require,module,exports) {
 var searchForm = document.querySelector('#search-form');
-var searchInput = document.querySelector('#search-input');
+var searchInput = document.querySelector('#search-input'); // Form Event Listner
+
 searchForm.addEventListener('submit', function (e) {
-  e.preventDefault();
-});
+  e.preventDefault(); // Get search term
+
+  var searchTerm = searchInput.value; // Get sort
+
+  var sortBy = document.querySelector('input[name="sortby"]:checked').value; // Get limit
+
+  var searchLimit = document.querySelector('#limit').value; // Check input 
+
+  if (searchTerm === '') {
+    // Show message 
+    showMessage('Please add a search term', 'alert-danger');
+  } // Clear input
+
+
+  searchInput.value = " "; // Search Reddit
+}); //Show Message
+
+function showMessage(message, className) {
+  // Create div
+  var div = document.createElement('div'); // Add Classes
+
+  div.className = "alert ".concat(className); // Add text
+
+  div.appendChild(document.createTextNode(message)); // Get parent 
+
+  var searchContainer = document.querySelector('#search-container'); // Get search
+
+  var search = document.querySelector('#search'); // Insert message
+
+  searchContainer.insertBefore(div, search); // Timeout Alert
+
+  setTimeout(function () {
+    document.querySelector('.alert').remove();
+  }, 2000);
+}
 },{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
