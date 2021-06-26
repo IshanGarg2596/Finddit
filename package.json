@@ -4,7 +4,7 @@
   "description": "Reddit Search App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/IshanGarg2596/Finddit/issues"
   },
-  "homepage": "https://github.com/IshanGarg2596/Finddit#readme"
+  "homepage": "https://github.com/IshanGarg2596/Finddit#readme",
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
+  }
 }
