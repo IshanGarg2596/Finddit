@@ -117,7 +117,34 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"index.js":[function(require,module,exports) {
+})({"RedditAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  search: function search(searchTerm, searchLimit, sortBy) {
+    return fetch("http://www.reddit.com/search.json?q=".concat(searchTerm, "&sort=").concat(sortBy, "&limit=").concat(searchLimit)).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      return data.data.children.map(function (data) {
+        return data.data;
+      });
+    }).catch(function (err) {
+      return console.log(err);
+    });
+  }
+};
+exports.default = _default;
+},{}],"index.js":[function(require,module,exports) {
+"use strict";
+
+var _RedditAPI = _interopRequireDefault(require("./RedditAPI"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var searchForm = document.querySelector('#search-form');
 var searchInput = document.querySelector('#search-input'); // Form Event Listner
 
@@ -137,6 +164,17 @@ searchForm.addEventListener('submit', function (e) {
 
 
   searchInput.value = " "; // Search Reddit
+
+  _RedditAPI.default.search(searchTerm, searchLimit, sortBy).then(function (results) {
+    var output = '<div class="card-columns">';
+    results.forEach(function (post) {
+      //Check for image
+      var image = post.preview ? post.preview.images[0].source.url : 'https://rdwgroup.com/wp-content/uploads/2018/10/reddit2-800x450-1.png';
+      output += "\n            <div class=\"card\">\n                <img src=\"".concat(image, "\" class=\"card-img-top\" alt=\"...\">\n                <div class=\"card-body\">\n                <h5 class=\"card-title\">").concat(post.title, "</h5>\n                <p class=\"card-text\">").concat(truncateText(post.selftext, 100), "</p>\n                <a href=\"").concat(post.url, "\" class=\"btn btn-primary\">Read More</a>\n                <hr>\n                <span class=\"badge badge-secondary\">Subreddit: ").concat(post.subreddit, "</span>\n                <span class=\"badge badge-dark\">Score: ").concat(post.score, "</span>\n                </div>\n            </div>\n            ");
+    });
+    output += '</div>';
+    document.querySelector('#results').innerHTML = output;
+  });
 }); //Show Message
 
 function showMessage(message, className) {
@@ -156,8 +194,15 @@ function showMessage(message, className) {
   setTimeout(function () {
     document.querySelector('.alert').remove();
   }, 2000);
+} //Truncate text
+
+
+function truncateText(text, limit) {
+  var shortened = text.indexOf(' ', limit);
+  if (shortened === -1) return text;
+  return text.substring(0, shortened);
 }
-},{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./RedditAPI":"RedditAPI.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
