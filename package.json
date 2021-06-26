@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
-    "predeploy": "rm -rf dist && parcel build index.html --public-url YOUR_REPO_NAME",
+    "predeploy": "rm -rf dist && parcel build index.html --public-url /Finddit",
     "deploy": "gh-pages -d dist"
   },
   "repository": {
